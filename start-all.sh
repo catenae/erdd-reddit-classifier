@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#./build.sh
+./build.sh
 
 TS=$(date +%s)
 
