@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Catenae Link
 # Copyright (C) 2017 Rodrigo Martínez <dev@brunneis.com>
 #
@@ -14,7 +12,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FROM catenae/link
+FROM catenae/link:ubuntu
 
 RUN \
     pip install --upgrade pip \

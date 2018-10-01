@@ -1,15 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import timeit
 from catenae import Link, Electron
 
 
 class VectorAggregator(Link):
 
     def transform(self, electron):
-        tic = timeit.default_timer()
-        
         """
         The previous vector is aggregated with the new one
         """
@@ -37,9 +34,6 @@ class VectorAggregator(Link):
                                'aggregated_count_vectors')
         except:
             pass
-
-        toc=timeit.default_timer()
-        # print(toc - tic)
 
         return electron
 

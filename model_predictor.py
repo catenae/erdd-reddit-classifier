@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import timeit
 from catenae import Link, Electron
 
 
@@ -11,8 +10,6 @@ class ModelPredictor(Link):
         self.lr_model = self.load_object('lr_model')
 
     def transform(self, electron):
-        tic = timeit.default_timer()
-
         vector = electron.value['vector']
         proba = self.lr_model.predict_proba(vector).item(1)
         electron.value['proba'] = proba
@@ -36,10 +33,6 @@ class ModelPredictor(Link):
             stat_electron = Electron(electron.key,
                                      None,
                                      topic=self.output_topics[2])
-
-        toc=timeit.default_timer()
-        # print(toc - tic)
-        
         return [electron, stat_electron]
 
 

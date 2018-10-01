@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import timeit
 from catenae import Link, Electron, util
 from pymongo import MongoClient
 from conf import conf_loader as conf
+
 
 class ProbabilityStorer(Link):
 
@@ -17,20 +17,11 @@ class ProbabilityStorer(Link):
         self.users.create_index('nickname', unique=True, background=True)
 
     def transform(self, electron):
-        tic = timeit.default_timer()
-        
-        try:
-            self.users.update_one(
-                { 'nickname': electron.key },
-                { '$push': { 'risk_vector': electron.value['proba'] } },
-                upsert=True)
-        except Exception:
-            util.print_exception(self,
-                f"Unhandled exception. Value: {electron.value}. Exiting...",
-                fatal=True)
+        self.users.update_one(
+            { 'nickname': electron.key },
+            { '$push': { 'risk_vector': electron.value['proba'] } },
+            upsert=True)
 
-        toc=timeit.default_timer()
-        # print(toc - tic)
 
 if __name__ == '__main__':
     ProbabilityStorer().start(link_mode=Link.CUSTOM_OUTPUT)

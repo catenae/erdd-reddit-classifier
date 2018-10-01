@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import timeit
 import time
 from catenae import Link, Electron, util
 
@@ -52,7 +51,6 @@ class AlertManager(Link):
         return last_submission, last_comment
 
     def transform(self, electron):
-        tic = timeit.default_timer()
         try:
             proba = electron.value['proba']
             last_submission, last_comment = self._update_and_get_last_ids(electron)
@@ -81,9 +79,6 @@ class AlertManager(Link):
 
                 # print(f"[ALERT P{electron.value['priority']}] {electron.key}")
 
-                toc=timeit.default_timer()
-                # print(toc - tic)
-
                 return electron
         except:
             print(electron.value)
@@ -91,5 +86,6 @@ class AlertManager(Link):
                                  "Unhandled exception. Exiting...",
                                  fatal=True)
 
+                                 
 if __name__ == "__main__":
     AlertManager().start()

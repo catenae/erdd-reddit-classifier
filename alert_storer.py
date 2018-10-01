@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import timeit
 from catenae import Link, Electron, util
 from pymongo import MongoClient
 from conf import conf_loader as conf
+
 
 class AlertStorer(Link):
 
@@ -24,7 +24,6 @@ class AlertStorer(Link):
         self.users.create_index('nickname', unique=True, background=True)
 
     def transform(self, electron):
-        tic = timeit.default_timer()
         try:
             alert = {'user': electron.key,
                      'priority': electron.value['priority'],
@@ -48,9 +47,6 @@ class AlertStorer(Link):
             util.print_exception(self,
                 f"Unhandled exception. Value: {electron.value}. Exiting...",
                 fatal=True)
-                
-        toc=timeit.default_timer()
-        # print(toc - tic)
 
 
 if __name__ == '__main__':

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import timeit
 from catenae import Link, Electron, util
 
 
@@ -13,8 +12,6 @@ class TextVectorizer(Link):
             util.print_exception(self, "Could not load the count_vectorizer object.")
 
     def transform(self, electron):
-        tic = timeit.default_timer()
-
         content = electron.value['submission_title'] + " " \
             + electron.value['content']
 
@@ -25,9 +22,6 @@ class TextVectorizer(Link):
         # The content and the title are not needed anymore
         electron.value.pop('content')
         electron.value.pop('submission_title')
-
-        toc=timeit.default_timer()
-        # print(toc - tic)
 
         return electron
 

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import timeit
 from catenae import Link, Electron, util
 from pymongo import MongoClient
 from conf import conf_loader as conf
@@ -29,8 +28,6 @@ class PostUpdater(Link):
 
 
     def transform(self, electron):
-        tic = timeit.default_timer()
-
         try:
             proba = {'proba': electron.value['proba']}
 
@@ -49,9 +46,6 @@ class PostUpdater(Link):
             util.print_exception(self,
                 f"Unhandled exception. Value: {electron.value}Exiting...",
                 fatal=True)
-
-        toc=timeit.default_timer()
-        # print(toc - tic)
 
 
 if __name__ == "__main__":
