@@ -1,5 +1,5 @@
 # Catenae Link
-# Copyright (C) 2017 Rodrigo Martínez <dev@brunneis.com>
+# Copyright (C) 2017-2018 Rodrigo Martínez <dev@brunneis.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -12,18 +12,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FROM catenae/link:ubuntu
+FROM catenae/link:0.1.1
 
 RUN \
-    pip install --upgrade pip \
-    && pip install \
+    pip install \
         pymongo \
         numpy \
         scipy \
         scikit-learn \
     && rm -rf \
         /root/.cache/pip \
-        /var/cache/apk/* \
     && find / -type d -name __pycache__ -exec rm -r {} \+
 
 # Topology links
