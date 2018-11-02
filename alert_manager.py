@@ -55,7 +55,7 @@ class AlertManager(Link):
             proba = electron.value['proba']
             last_submission, last_comment = self._update_and_get_last_ids(electron)
 
-            if proba > .5:
+            if proba > .9:
                 # Remove unnecessary attributes
                 electron = Electron(electron.key, {'proba': proba})
 
@@ -86,6 +86,6 @@ class AlertManager(Link):
                                  "Unhandled exception. Exiting...",
                                  fatal=True)
 
-                                 
+
 if __name__ == "__main__":
     AlertManager().start()
