@@ -18,6 +18,7 @@ class AlertManager(Link):
         # Submissions
         if text_type == 0:
             last_submission = electron.value['submission_id']
+
         # Comments
         elif text_type == 1:
             last_comment = electron.value['comment_id']
@@ -25,28 +26,26 @@ class AlertManager(Link):
         # Overwrite the last submission_id received by the Alert Manager
         if text_type == 0:
             self.aerospike.put(user_id,
-                last_submission,
-                'test',
-                'alerts_last_submissions')
+                               last_submission,
+                               'test',
+                               'alerts_last_submissions')
 
             # Last comment associated with the previous alert
-            last_comment = self.aerospike.get(
-                user_id,
-                'test',
-                'alerts_last_comments')
+            _, last_comment = self.aerospike.get(user_id,
+                                                 'test',
+                                                 'alerts_last_comments')
 
         # Overwrite the last comment_id received by the Alert Manager
         if text_type == 1:
             self.aerospike.put(user_id,
-                last_comment,
-                'test',
-                'alerts_last_comments')
+                               last_comment,
+                               'test',
+                               'alerts_last_comments')
 
             # Last submission associated with the previous alert
-            last_submission = self.aerospike.get(
-                user_id,
-                'test',
-                'alerts_last_submissions')
+            _, last_submission = self.aerospike.get(user_id,
+                                                    'test',
+                                                    'alerts_last_submissions')
 
         return last_submission, last_comment
 

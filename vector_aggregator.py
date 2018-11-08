@@ -22,7 +22,7 @@ class VectorAggregator(Link):
             electron.value['vector'] = vector + \
                 self.aerospike.get(electron.key,
                                    'test',
-                                   'aggregated_count_vectors')
+                                   'aggregated_count_vectors')[1]
         except:
             pass
 
