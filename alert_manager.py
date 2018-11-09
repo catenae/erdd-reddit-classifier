@@ -54,7 +54,7 @@ class AlertManager(Link):
             proba = electron.value['proba']
             last_submission, last_comment = self._update_and_get_last_ids(electron)
 
-            if proba > .9:
+            if proba > .75:
                 # Remove unnecessary attributes
                 electron = Electron(electron.key, {'proba': proba})
 
